@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "clearview",
   "version": "${version}",
 
   "name": "Example Mod",
@@ -18,11 +18,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "tfar.example.ExampleMod"
+      "tfar.clearview.ClearView"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "clearview.mixins.json"
   ],
 
   "depends": {
