@@ -1,9 +1,9 @@
 package tfar.clearview;
 
-import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+/*import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
-import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;*/
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
@@ -19,7 +19,7 @@ public class ClearView implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);
+		//AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);
 
 		ClientConfig.register();
 	}
@@ -33,10 +33,10 @@ public class ClearView implements ModInitializer {
 		Entity entity = camera.getFocusedEntity();
 		boolean fluidnotempty = fluidState.getFluid() != Fluids.EMPTY;
 		if (fluidnotempty) {
-			if (fluidState.matches(FluidTags.WATER) && !ClientConfig.config.enable_water_fog)  {
+			if (fluidState.isIn(FluidTags.WATER) && !ClientConfig.config.enable_water_fog)  {
 				return true;
 			}
-			if (fluidState.matches(FluidTags.LAVA))
+			if (fluidState.isIn(FluidTags.LAVA))
 				if (!ClientConfig.config.enable_lava_fog)
 					return true;
 
@@ -47,8 +47,8 @@ public class ClearView implements ModInitializer {
 		return false;
 	}
 
-	@Config(name = ClearView.MODID)
-	public static class ClientConfig implements ConfigData {
+	//@Config(name = ClearView.MODID)
+	public static class ClientConfig /*implements ConfigData*/ {
 		public static ClientConfig config;
 
 		public boolean enable_blindness_fog;
@@ -58,7 +58,7 @@ public class ClearView implements ModInitializer {
 		public boolean enable_terrain_fog;
 
 		public static void register() {
-			config = AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
+			config = new ClientConfig();//AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
 		}
 	}
 }
