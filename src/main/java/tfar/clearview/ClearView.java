@@ -4,6 +4,10 @@ package tfar.clearview;
 import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
 import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
 import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;*/
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
+import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import me.sargunvohra.mcmods.autoconfig1u.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
@@ -19,7 +23,7 @@ public class ClearView implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		//AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);
+		AutoConfig.register(ClientConfig.class, Toml4jConfigSerializer::new);
 
 		ClientConfig.register();
 	}
@@ -47,18 +51,18 @@ public class ClearView implements ModInitializer {
 		return false;
 	}
 
-	//@Config(name = ClearView.MODID)
-	public static class ClientConfig /*implements ConfigData*/ {
+	@Config(name = ClearView.MODID)
+	public static class ClientConfig implements ConfigData {
 		public static ClientConfig config;
 
-		public boolean enable_blindness_fog;
+		public boolean enable_blindness_fog = true;
 		public boolean enable_water_fog;
 		public boolean enable_lava_fog;
 		public boolean enable_sky_fog;
 		public boolean enable_terrain_fog;
 
 		public static void register() {
-			config = new ClientConfig();//AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
+			config = AutoConfig.getConfigHolder(ClientConfig.class).getConfig();
 		}
 	}
 }
